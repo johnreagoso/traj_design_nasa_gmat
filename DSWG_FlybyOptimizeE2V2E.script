@@ -1,0 +1,536 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2014-10-08 14:27:32
+
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2014-10-07 18:18:15
+
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2014-05-07 03:59:47
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+%============================================================
+Create Spacecraft Orion8SCFullTraj2;
+GMAT Orion8SCFullTraj2.DateFormat = UTCGregorian;
+GMAT Orion8SCFullTraj2.Epoch = '05 Jan 2018 18:26:27.974';
+GMAT Orion8SCFullTraj2.CoordinateSystem = SunEcliptic;
+GMAT Orion8SCFullTraj2.DisplayStateType = Cartesian;
+GMAT Orion8SCFullTraj2.X = -37682857.71171894;
+GMAT Orion8SCFullTraj2.Y = 142192634.013049;
+GMAT Orion8SCFullTraj2.Z = -5869.563034921885;
+GMAT Orion8SCFullTraj2.VX = -29.79422519515318;
+GMAT Orion8SCFullTraj2.VY = 1.671780444597602;
+GMAT Orion8SCFullTraj2.VZ = -2.00599803335916;
+GMAT Orion8SCFullTraj2.DryMass = 850;
+GMAT Orion8SCFullTraj2.Cd = 2.2;
+GMAT Orion8SCFullTraj2.Cr = 1.8;
+GMAT Orion8SCFullTraj2.DragArea = 15;
+GMAT Orion8SCFullTraj2.SRPArea = 1;
+GMAT Orion8SCFullTraj2.NAIFId = -123456789;
+GMAT Orion8SCFullTraj2.NAIFIdReferenceFrame = -123456789;
+GMAT Orion8SCFullTraj2.OrbitColor = Pink;
+GMAT Orion8SCFullTraj2.TargetColor = DarkSlateGray;
+GMAT Orion8SCFullTraj2.Id = 'SatId';
+GMAT Orion8SCFullTraj2.Attitude = CoordinateSystemFixed;
+GMAT Orion8SCFullTraj2.SPADSRPScaleFactor = 1;
+GMAT Orion8SCFullTraj2.ModelFile = '../data/vehicle/models/aura.3ds';
+GMAT Orion8SCFullTraj2.ModelOffsetX = 0;
+GMAT Orion8SCFullTraj2.ModelOffsetY = 0;
+GMAT Orion8SCFullTraj2.ModelOffsetZ = 0;
+GMAT Orion8SCFullTraj2.ModelRotationX = 0;
+GMAT Orion8SCFullTraj2.ModelRotationY = 0;
+GMAT Orion8SCFullTraj2.ModelRotationZ = 0;
+GMAT Orion8SCFullTraj2.ModelScale = 3;
+GMAT Orion8SCFullTraj2.AttitudeDisplayStateType = 'Quaternion';
+GMAT Orion8SCFullTraj2.AttitudeRateDisplayStateType = 'AngularVelocity';
+GMAT Orion8SCFullTraj2.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Orion8SCFullTraj2.EulerAngleSequence = '321';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+GMAT DefaultProp_ForceModel.CentralBody = Earth;
+GMAT DefaultProp_ForceModel.PrimaryBodies = {Earth};
+GMAT DefaultProp_ForceModel.Drag = None;
+GMAT DefaultProp_ForceModel.SRP = Off;
+GMAT DefaultProp_ForceModel.RelativisticCorrection = Off;
+GMAT DefaultProp_ForceModel.ErrorControl = RSSStep;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Degree = 4;
+GMAT DefaultProp_ForceModel.GravityField.Earth.Order = 4;
+GMAT DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT DefaultProp_ForceModel.GravityField.Earth.EarthTideModel = 'None';
+
+Create ForceModel DeepSpaceProp_ForceModel;
+GMAT DeepSpaceProp_ForceModel.CentralBody = Sun;
+GMAT DeepSpaceProp_ForceModel.PointMasses = {Earth, Jupiter, Mars, Sun, Venus};
+GMAT DeepSpaceProp_ForceModel.Drag = None;
+GMAT DeepSpaceProp_ForceModel.SRP = Off;
+GMAT DeepSpaceProp_ForceModel.RelativisticCorrection = Off;
+GMAT DeepSpaceProp_ForceModel.ErrorControl = RSSStep;
+
+Create ForceModel EarthSOIProp_ForceModel;
+GMAT EarthSOIProp_ForceModel.CentralBody = Earth;
+GMAT EarthSOIProp_ForceModel.PrimaryBodies = {Earth};
+GMAT EarthSOIProp_ForceModel.PointMasses = {Luna, Sun};
+GMAT EarthSOIProp_ForceModel.Drag = None;
+GMAT EarthSOIProp_ForceModel.SRP = Off;
+GMAT EarthSOIProp_ForceModel.RelativisticCorrection = Off;
+GMAT EarthSOIProp_ForceModel.ErrorControl = RSSStep;
+GMAT EarthSOIProp_ForceModel.GravityField.Earth.Degree = 4;
+GMAT EarthSOIProp_ForceModel.GravityField.Earth.Order = 4;
+GMAT EarthSOIProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+GMAT EarthSOIProp_ForceModel.GravityField.Earth.EarthTideModel = 'None';
+
+Create ForceModel VenusProp_ForceModel;
+GMAT VenusProp_ForceModel.CentralBody = Venus;
+GMAT VenusProp_ForceModel.PointMasses = {Jupiter, Mars, Sun, Venus};
+GMAT VenusProp_ForceModel.Drag = None;
+GMAT VenusProp_ForceModel.SRP = Off;
+GMAT VenusProp_ForceModel.RelativisticCorrection = Off;
+GMAT VenusProp_ForceModel.ErrorControl = RSSStep;
+
+Create ForceModel DeepSpaceNoEarth_ForceModel;
+GMAT DeepSpaceNoEarth_ForceModel.CentralBody = Sun;
+GMAT DeepSpaceNoEarth_ForceModel.PointMasses = {Jupiter, Sun};
+GMAT DeepSpaceNoEarth_ForceModel.Drag = None;
+GMAT DeepSpaceNoEarth_ForceModel.SRP = Off;
+GMAT DeepSpaceNoEarth_ForceModel.RelativisticCorrection = Off;
+GMAT DeepSpaceNoEarth_ForceModel.ErrorControl = RSSStep;
+
+Create ForceModel Propagator1_ForceModel;
+GMAT Propagator1_ForceModel.CentralBody = Sun;
+GMAT Propagator1_ForceModel.PointMasses = {Jupiter, Mars, Sun};
+GMAT Propagator1_ForceModel.Drag = None;
+GMAT Propagator1_ForceModel.SRP = Off;
+GMAT Propagator1_ForceModel.RelativisticCorrection = Off;
+GMAT Propagator1_ForceModel.ErrorControl = RSSStep;
+
+Create ForceModel DeepSpaceVenusProp_ForceModel;
+GMAT DeepSpaceVenusProp_ForceModel.CentralBody = Venus;
+GMAT DeepSpaceVenusProp_ForceModel.PointMasses = {Sun, Venus};
+GMAT DeepSpaceVenusProp_ForceModel.Drag = None;
+GMAT DeepSpaceVenusProp_ForceModel.SRP = Off;
+GMAT DeepSpaceVenusProp_ForceModel.RelativisticCorrection = Off;
+GMAT DeepSpaceVenusProp_ForceModel.ErrorControl = RSSStep;
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+GMAT DefaultProp.FM = DefaultProp_ForceModel;
+GMAT DefaultProp.Type = RungeKutta89;
+GMAT DefaultProp.InitialStepSize = 5;
+GMAT DefaultProp.Accuracy = 9.999999999999999e-012;
+GMAT DefaultProp.MinStep = 0.001;
+GMAT DefaultProp.MaxStep = 2700;
+GMAT DefaultProp.MaxStepAttempts = 50;
+GMAT DefaultProp.StopIfAccuracyIsViolated = true;
+
+Create Propagator DeepSpaceProp;
+GMAT DeepSpaceProp.FM = DeepSpaceProp_ForceModel;
+GMAT DeepSpaceProp.Type = PrinceDormand78;
+GMAT DeepSpaceProp.InitialStepSize = 60;
+GMAT DeepSpaceProp.Accuracy = 1e-006;
+GMAT DeepSpaceProp.MinStep = 0.0001;
+GMAT DeepSpaceProp.MaxStep = 86400;
+GMAT DeepSpaceProp.MaxStepAttempts = 50;
+GMAT DeepSpaceProp.StopIfAccuracyIsViolated = false;
+
+Create Propagator EarthSOIProp;
+GMAT EarthSOIProp.FM = EarthSOIProp_ForceModel;
+GMAT EarthSOIProp.Type = RungeKutta89;
+GMAT EarthSOIProp.InitialStepSize = 600;
+GMAT EarthSOIProp.Accuracy = 9.999999999999999e-012;
+GMAT EarthSOIProp.MinStep = 0;
+GMAT EarthSOIProp.MaxStep = 600;
+GMAT EarthSOIProp.MaxStepAttempts = 50;
+GMAT EarthSOIProp.StopIfAccuracyIsViolated = true;
+
+Create Propagator VenusProp;
+GMAT VenusProp.FM = VenusProp_ForceModel;
+GMAT VenusProp.Type = PrinceDormand78;
+GMAT VenusProp.InitialStepSize = 600;
+GMAT VenusProp.Accuracy = 1e-012;
+GMAT VenusProp.MinStep = 0;
+GMAT VenusProp.MaxStep = 86400;
+GMAT VenusProp.MaxStepAttempts = 50;
+GMAT VenusProp.StopIfAccuracyIsViolated = true;
+
+Create Propagator DeepSpaceNoEarth;
+GMAT DeepSpaceNoEarth.FM = DeepSpaceNoEarth_ForceModel;
+GMAT DeepSpaceNoEarth.Type = RungeKutta89;
+GMAT DeepSpaceNoEarth.InitialStepSize = 60;
+GMAT DeepSpaceNoEarth.Accuracy = 9.999999999999999e-005;
+GMAT DeepSpaceNoEarth.MinStep = 30;
+GMAT DeepSpaceNoEarth.MaxStep = 2700;
+GMAT DeepSpaceNoEarth.MaxStepAttempts = 50;
+GMAT DeepSpaceNoEarth.StopIfAccuracyIsViolated = false;
+
+Create Propagator Propagator1;
+GMAT Propagator1.FM = Propagator1_ForceModel;
+GMAT Propagator1.Type = RungeKutta89;
+GMAT Propagator1.InitialStepSize = 60;
+GMAT Propagator1.Accuracy = 9.999999999999999e-012;
+GMAT Propagator1.MinStep = 0.001;
+GMAT Propagator1.MaxStep = 2700;
+GMAT Propagator1.MaxStepAttempts = 50;
+GMAT Propagator1.StopIfAccuracyIsViolated = true;
+
+Create Propagator DeepSpaceVenusProp;
+GMAT DeepSpaceVenusProp.FM = DeepSpaceVenusProp_ForceModel;
+GMAT DeepSpaceVenusProp.Type = PrinceDormand78;
+GMAT DeepSpaceVenusProp.InitialStepSize = 600;
+GMAT DeepSpaceVenusProp.Accuracy = 1e-012;
+GMAT DeepSpaceVenusProp.MinStep = 0;
+GMAT DeepSpaceVenusProp.MaxStep = 86400;
+GMAT DeepSpaceVenusProp.MaxStepAttempts = 50;
+GMAT DeepSpaceVenusProp.StopIfAccuracyIsViolated = true;
+
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create ImpulsiveBurn DefaultIB;
+GMAT DefaultIB.CoordinateSystem = Local;
+GMAT DefaultIB.Origin = Earth;
+GMAT DefaultIB.Axes = VNB;
+GMAT DefaultIB.Element1 = -3.5;
+GMAT DefaultIB.Element2 = -0.01743;
+GMAT DefaultIB.Element3 = 1.709;
+GMAT DefaultIB.DecrementMass = false;
+GMAT DefaultIB.Isp = 300;
+GMAT DefaultIB.GravitationalAccel = 9.810000000000001;
+
+%----------------------------------------
+%---------- Coordinate Systems
+%----------------------------------------
+
+Create CoordinateSystem MarsInertial;
+GMAT MarsInertial.Origin = Mars;
+GMAT MarsInertial.Axes = BodyInertial;
+
+Create CoordinateSystem SunEcliptic;
+GMAT SunEcliptic.Origin = Sun;
+GMAT SunEcliptic.Axes = MJ2000Ec;
+
+Create CoordinateSystem SunMOJ2000;
+GMAT SunMOJ2000.Origin = Sun;
+GMAT SunMOJ2000.Axes = MJ2000Ec;
+
+Create CoordinateSystem SunMOJ2000EarthEq;
+GMAT SunMOJ2000EarthEq.Origin = Sun;
+GMAT SunMOJ2000EarthEq.Axes = MJ2000Eq;
+
+Create CoordinateSystem VenusInertial;
+GMAT VenusInertial.Origin = Venus;
+GMAT VenusInertial.Axes = MJ2000Ec;
+
+
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+
+Create DifferentialCorrector DC1;
+
+GMAT DC1.ShowProgress = true;
+GMAT DC1.ReportStyle = Normal;
+GMAT DC1.ReportFile = 'DifferentialCorrectorDC1.data';
+GMAT DC1.MaximumIterations = 100;
+GMAT DC1.DerivativeMethod = ForwardDifference;
+GMAT DC1.Algorithm = NewtonRaphson;
+
+Create FminconOptimizer SQP1;
+GMAT SQP1.ShowProgress = true;
+GMAT SQP1.ReportStyle = Normal;
+GMAT SQP1.ReportFile = 'FminconOptimizerSQP1.data';
+GMAT SQP1.MaximumIterations = 800;
+GMAT SQP1.DiffMaxChange = '0.1000';
+GMAT SQP1.DiffMinChange = '1.0000e-12';
+GMAT SQP1.MaxFunEvals = '500';
+GMAT SQP1.TolX = '1.0000e-02';
+GMAT SQP1.TolFun = '1.0000e-02';
+GMAT SQP1.TolCon = '1.0000e-02';
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create ReportFile SC_FullTraj2_Pos;
+GMAT SC_FullTraj2_Pos.SolverIterations = Current;
+GMAT SC_FullTraj2_Pos.UpperLeft = [ 0.05663716814159292 0.1026894865525672 ];
+GMAT SC_FullTraj2_Pos.Size = [ 0.8064896755162242 0.7897310513447433 ];
+GMAT SC_FullTraj2_Pos.RelativeZOrder = 103;
+GMAT SC_FullTraj2_Pos.Maximized = true;
+GMAT SC_FullTraj2_Pos.Filename = 'ReportFile1.txt';
+GMAT SC_FullTraj2_Pos.Precision = 16;
+GMAT SC_FullTraj2_Pos.Add = {Orion8SCFullTraj2.A1Gregorian, Orion8SCFullTraj2.SunMOJ2000.X, Orion8SCFullTraj2.Earth.RMAG};
+GMAT SC_FullTraj2_Pos.WriteHeaders = true;
+GMAT SC_FullTraj2_Pos.LeftJustify = On;
+GMAT SC_FullTraj2_Pos.ZeroFill = Off;
+GMAT SC_FullTraj2_Pos.ColumnWidth = 23;
+GMAT SC_FullTraj2_Pos.WriteReport = true;
+
+Create ReportFile SC_FullTraj2_Vel;
+GMAT SC_FullTraj2_Vel.SolverIterations = Current;
+GMAT SC_FullTraj2_Vel.UpperLeft = [ 0.136283185840708 0.2481662591687042 ];
+GMAT SC_FullTraj2_Vel.Size = [ 0.5964601769911504 0.7909535452322738 ];
+GMAT SC_FullTraj2_Vel.RelativeZOrder = 102;
+GMAT SC_FullTraj2_Vel.Maximized = true;
+GMAT SC_FullTraj2_Vel.Filename = 'ReportFile1.txt';
+GMAT SC_FullTraj2_Vel.Precision = 16;
+GMAT SC_FullTraj2_Vel.Add = {Orion8SCFullTraj2.A1Gregorian, Orion8SCFullTraj2.SunMOJ2000.VX};
+GMAT SC_FullTraj2_Vel.WriteHeaders = true;
+GMAT SC_FullTraj2_Vel.LeftJustify = On;
+GMAT SC_FullTraj2_Vel.ZeroFill = Off;
+GMAT SC_FullTraj2_Vel.ColumnWidth = 23;
+GMAT SC_FullTraj2_Vel.WriteReport = true;
+
+Create ReportFile ReportFile1;
+GMAT ReportFile1.SolverIterations = Current;
+GMAT ReportFile1.UpperLeft = [ 0.0696165191740413 0.1356968215158924 ];
+GMAT ReportFile1.Size = [ 0.5982300884955752 0.7958435207823961 ];
+GMAT ReportFile1.RelativeZOrder = 101;
+GMAT ReportFile1.Maximized = true;
+GMAT ReportFile1.Filename = 'ReportFile1.txt';
+GMAT ReportFile1.Precision = 16;
+GMAT ReportFile1.Add = {Orion8SCFullTraj2.A1ModJulian, Orion8SCFullTraj2.Earth.RMAG};
+GMAT ReportFile1.WriteHeaders = true;
+GMAT ReportFile1.LeftJustify = On;
+GMAT ReportFile1.ZeroFill = Off;
+GMAT ReportFile1.ColumnWidth = 23;
+GMAT ReportFile1.WriteReport = true;
+
+Create ReportFile ReportFile2;
+GMAT ReportFile2.SolverIterations = Current;
+GMAT ReportFile2.UpperLeft = [ 0.1061946902654867 0.05256723716381418 ];
+GMAT ReportFile2.Size = [ 0.5982300884955752 0.7958435207823961 ];
+GMAT ReportFile2.RelativeZOrder = 100;
+GMAT ReportFile2.Maximized = true;
+GMAT ReportFile2.Filename = 'ReportFile2.txt';
+GMAT ReportFile2.Precision = 16;
+GMAT ReportFile2.Add = {Orion8SCFullTraj2.UTCGregorian, Orion8SCFullTraj2.Mars.RMAG};
+GMAT ReportFile2.WriteHeaders = true;
+GMAT ReportFile2.LeftJustify = On;
+GMAT ReportFile2.ZeroFill = Off;
+GMAT ReportFile2.ColumnWidth = 23;
+GMAT ReportFile2.WriteReport = true;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+
+Create Array aEarthPos[1,3];
+Create Variable vTOF1seed vArc1EnergySeed vSeedPatchX vSeedPatchY vSeedPatchZ vDeltaPatchX vDeltaPatchY vDeltaPatchZ vPreFlyTOF vDeltaPatchVX;
+Create Variable vDeltaPatchVY vDeltaPatchVZ vSeedPatchVX vSeedPatchVY vSeedPatchVZ vPatchEpoch vTOF2seed vPatch2Epoch vSeedPatch2X vSeedPatch2Y;
+Create Variable vSeedPatch2Z vSeedPatch2VX vSeedPatch2VY vSeedPatch2VZ vDeltaPatch2X vDeltaPatch2Y vDeltaPatch2Z vDeltaPatch2VX vDeltaPatch2VY vDeltaPatch2VZ;
+Create Variable vEarthDist vPreFlyEpoch vPostFlyEpoch vFlybyX vFlybyY vFlybyZ vFlybyVX vFlybyVY vFlybyVZ vMarsDist;
+Create Variable vMissTot vLoopIndex vXdepart vYdepart vZdepart vXdepartSeed vYdepartSeed vZdepartSeed vXarrive vYarrive;
+Create Variable vZarrive vXArriveSeed vYArriveSeed vZArriveSeed vVXdepart vVYdepart vVZdepart vVXdepartSeed vVYdepartSeed vVZdepartSeed;
+Create Variable vDeltaXnorm vDeltaYnorm vDeltaZnorm vDeltaXnorm2 vDeltaYnorm2 vDeltaZnorm2 vVXarrive vVYarrive vVZarrive vVXarriveSeed;
+Create Variable vDeltaVXnorm vDeltaVYnorm vDeltaVZnorm vDeltaVXnorm2 vDeltaVYnorm2 vDeltaVZnorm2 vVYarriveSeed vVZarriveSeed vXFlybySeed vYFlybySeed;
+Create Variable vZFlybySeed vVXFlybySeed vVYFlybySeed vVZFlybySeed vDepCost vTOF1seedDC vTOF2seedDC vFlybyXdc vFlybyYdc vFlybyZdc;
+Create Variable vFlybyVXdc vFlybyVYdc vFlybyVZdc vArriveEpochFullTraj vEarthReturnMagntd vEndEpochEarth vTempStart vDepVxScale vDepVyScale vDepVzScale;
+Create Variable vDepVxScaleUL vDepVyScaleUL vDepVzScaleUL vDepVxScaleLL vDepVyScaleLL vDepVzScaleLL vTOF1UL vTOF1LL vTOF1scale vFlybyXScaleLL;
+Create Variable vArrVxScaleUL vArrVyScaleUL vArrVzScaleUL vArrVxScaleLL vArrVyScaleLL vArrVzScaleLL vFlybyYScaleLL vFlybyZScaleLL vFlybyVXScaleLL vFlybyVYScaleLL;
+Create Variable vFlybyVZScaleLL vFlybyXScaleUL vFlybyYScaleUL vFlybyZScaleUL vFlybyVXScaleUL vFlybyVYScaleUL vFlybyVZScaleUL vTOF2UL vTOF2LL vTOF2scale;
+Create Variable vSpeedMissTot vHelioSpeedDepart;
+
+
+
+
+
+
+
+% ----------------------------------------
+% ---------- Mission Sequence
+% ----------------------------------------
+BeginMissionSequence;
+
+GMAT Orion8SCFullTraj2.SunMOJ2000.X = -3.837370792427561e+007;
+GMAT Orion8SCFullTraj2.SunMOJ2000.Y = 1.420083750069271e+008;
+GMAT Orion8SCFullTraj2.SunMOJ2000.Z = -5.885935489229858e+003;
+
+GMAT Orion8SCFullTraj2.SunMOJ2000.VX = -2.907592003652969e+001;
+GMAT Orion8SCFullTraj2.SunMOJ2000.VY = -1.390643981039050e+001;
+GMAT Orion8SCFullTraj2.SunMOJ2000.VZ = 1.832794991351005e+000;
+
+% Propagate DeepSpaceNoEarth(Orion8SCFullTraj2) {Orion8SCFullTraj2.ElapsedDays = 1.0};
+% Propagate DeepSpaceProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.ElapsedDays = 220};
+% Propagate MarsProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.UTCModJulian = 28352.06794944748};
+% Propagate MarsProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.ElapsedDays = 1.00};
+% Propagate DeepSpaceProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.UTCModJulian = 28624.45147623049};
+% Stop;
+
+Optimize 'SingleFullTrajPolish' SQP1 {SolveMode = Solve, ExitMode = DiscardAndContinue};
+   
+   %   Vary 'DepartSeedVary' SQP1(Orion8SCFullTraj2.A1ModJulian = 28123.99545397273, {Lower = 28121, Upper = 28124, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary SQP1(Orion8SCFullTraj2.SunMOJ2000.VX = -29.07591998492129, {Lower = -30, Upper = -29, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary SQP1(Orion8SCFullTraj2.SunMOJ2000.VY = -13.90643921904111, {Lower = -14, Upper = -13, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary SQP1(Orion8SCFullTraj2.SunMOJ2000.VZ = 1.83279509984952, {Lower = 1.0, Upper = 2.0, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   
+   GMAT vHelioSpeedDepart = sqrt(Orion8SCFullTraj2.SunMOJ2000.VX^2 + Orion8SCFullTraj2.SunMOJ2000.VY^2 + Orion8SCFullTraj2.SunMOJ2000.VZ^2);
+   
+   Propagate DeepSpaceNoEarth(Orion8SCFullTraj2) {Orion8SCFullTraj2.ElapsedDays = 1.0};
+   Propagate DeepSpaceProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.ElapsedDays = 220};
+   Propagate VenusProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.UTCModJulian = 28352.06794944748};
+   Propagate VenusProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.ElapsedDays = 1.00};
+   Propagate DeepSpaceProp(Orion8SCFullTraj2) {Orion8SCFullTraj2.UTCModJulian = 28624.38166523133};
+   
+   GMAT vEarthReturnMagntd = abs(Orion8SCFullTraj2.Earth.RMAG);
+   NonlinearConstraint 'here' SQP1(vEarthReturnMagntd<=7000);
+%Minimize SQP1(vHelioSpeedDepart);
+
+EndOptimize;  % For targeter DC1
+Stop;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
